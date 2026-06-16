@@ -1,0 +1,37 @@
+---
+import FormattedDate from './FormattedDate.astro';
+
+const post = Astro.props.post;
+---
+
+<a href={`/notes/${post.id}/`}>									
+	<div class="post-header">
+		<p class="title">{post.data.title}</p>
+		<p class="date">
+		    <FormattedDate date={post.data.pubDate} />
+		</p>
+	</div>
+</a>
+
+<style>
+
+            .post-header {
+				display: flex;
+				gap: 1rem;
+				align-items: center;
+                justify-content: space-between;
+			}
+			
+			.title {
+				margin: 0;
+				line-height: 1;
+			}
+			.date {
+				margin: 0;
+				color: rgb(var(--gray));
+			}
+			ul li a:hover {
+				color: var(--accent);
+				/* border: 2px solid var(--accent-dark); */
+			},		
+</style>

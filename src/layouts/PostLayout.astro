@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+import PageLayout from './PageLayout.astro';
+
+// type Props = CollectionEntry<'blog'>['data'];
+
+const { title, pubDate, updatedDate, heroImage, tags } = Astro.props;
+---
+
+<PageLayout>
+	
+			<article>
+				<div class="hero-image">
+					{heroImage && <Image src={heroImage} alt="" />}
+				</div>
+				<div class="prose">
+					<div class="title">						
+						<h1>{title}</h1>
+						<div class="date">
+							<FormattedDate date={pubDate} />
+							{
+								updatedDate && (
+									<div class="last-updated-on">
+										Last updated on <FormattedDate date={updatedDate} />
+									</div>
+								)
+							}
+						</div>
+						{tags && (
+							<ul class = "tags-list">
+								{tags.map((tag: unknown) => <li class = "tag-item"><a href={`/tags/${tag}`}>#{tag}</a></li>)}
+							</ul>
+						)}
+						<hr />
+					</div>
+					<slot />
+				</div>
+			</article>
+		
+</PageLayout>
+<style>
+			
+			.hero-image {
+				margin : 0 auto;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+			}
+			.prose {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--white));
+			}
+			.title {
+				margin-bottom: 1em;
+				padding: 1em 0;
+				text-align: center;
+				line-height: 1;
+				color: var(--accent);
+			}			
+			.date {
+				margin-bottom: 0.5em;
+				font-size: 1.25em;
+				color: gray;
+			}
+			.last-updated-on {
+				font-style: italic;
+			}
+</style>

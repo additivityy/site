@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import '../../styles/global.css';
+
+const allPosts = await getCollection('notes');
+const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+---
+
+<PageLayout>
+    <h3>all the tags in this site:</h3>
+    <div> 
+        <ul class = "tags-list">
+            {uniqueTags.map((tag) => <li class = "tag-item"><a href={`/tags/${tag}`}>#{tag}</a></li>)}
+        </ul>
+    </div>
+</PageLayout>
+
+<!-- <style>
+    .tags-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding-left: 0;
+    }
+    .tag-item {
+        background-color: rgba(153, 205, 50, 0.253);
+        padding: 5px 15px;
+        border-radius: 20px;
+        list-style: none;
+        margin-bottom: 0.5rem;
+        color: white;
+    }
+    /* a {
+        text-decoration: none;
+        color: white;
+    } */
+</style> -->

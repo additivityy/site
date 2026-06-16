@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import HeaderLink from './HeaderLink.astro';
+import logo from '../assets/site-logo.png';
+import rssIcon from '../assets/rss.svg';
+---
+
+<header>
+	<nav>
+		<a class="logo" href="/">
+			<Image src={logo} alt="site logo" width={50} height={50} />
+		</a>
+		<div class="internal-links">
+			<HeaderLink href="/">home</HeaderLink>
+			<HeaderLink href="/projects">projects</HeaderLink>
+			<HeaderLink href="/notes">notes</HeaderLink>
+			
+		</div>
+	</nav>
+</header>
+<style>
+	header {
+		margin: 1em 0;
+	}	
+	h2 {
+		margin: 0;
+		font-size: 1em;
+	}
+
+	h2 a,
+	h2 a.active {
+		text-decoration: none;
+	}
+	nav {
+		display: flex;
+		align-items: center;
+		margin: 0 auto;
+		justify-content: space-between;
+		width: 820px;
+	}
+	nav a {
+		width: 100px;
+		height: 50px;	
+		color: var(--white);
+		text-decoration: none;
+		text-align: center;
+		align-content: center;
+	}
+	nav a.active {
+		text-decoration: none;
+		border: 2px solid var(--accent);
+	}
+
+	.logo {
+		border: none;
+	}
+	.internal-links {
+		display: flex;
+		align-items: center;
+	}
+	.internal-links img {
+		filter: brightness(0) invert(1);
+	}
+	.social-links,
+	.social-links a {
+		display: flex;
+	}
+	@media (max-width: 720px) {
+		.social-links {
+			display: none;
+		}
+	}
+</style>
