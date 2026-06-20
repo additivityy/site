@@ -133,7 +133,7 @@ bundle install
 cat fastlane/.env
 ```
 
-***UBUNTU***
+***UBUNTU***<br/>
 we'll need ruby and bundler and a bunch of packages -
 
 ```sh
@@ -152,10 +152,10 @@ unless File.exist?(json_key_path)
 File.write(json_key_path, ENV["GOOGLE_PLAY_JSON_KEY"]) end
 ```
 
-***MAC***
+***MAC***<br/>
 we get some issues with system ruby in mac idk how to solve it :)
 
-***WINDOWS***
+***WINDOWS***<br/>
 `¯\_(ツ)_/¯`
 
 to actually test the deployment:

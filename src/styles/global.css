@@ -180,29 +180,9 @@ td {
 			.post-list-item a:hover {
 				color: var(--accent);
 			}
-			@media (max-width: 720px) {
-				.post-list {
-					gap: 0.5em;
-				}
-				.post-list-item {
-					width: 100%;
-					text-align: center;
-			}
-				.post-list-item:first-child {
-					margin-bottom: 0;
-				}
-				.post-list li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
-}
+		
+
+
 
 .sr-only {
 	border: 0;
@@ -220,4 +200,69 @@ td {
 	clip-path: inset(50%);
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+	body {
+		font-size: 16px;
+		line-height: 1.6;
+	}
+
+	main {
+		width: auto;
+		max-width: 100%;
+		margin: 0.5em;
+		padding: 2em 1em;
+		border: none;
+		border-width: 0;
+	}
+
+	code {
+		font-size: 0.875em;
+		width: auto;
+	}
+	table {
+		width: 100%;
+		overflow-x: auto;
+		display: block;
+	}
+
+	h1 {
+		font-size: 2rem;
+	}
+
+	h2 {
+		font-size: 1.75rem;
+	}
+
+	h3 {
+		font-size: 1.4rem;
+	}
+
+	p,
+	blockquote,
+	li,
+	code,
+	pre,
+	input,
+	textarea {
+		font-size: 1rem;
+	}
+	
+	blockquote {
+		font-size: 1.15em;
+		padding-left: 1rem;
+	}
+
+	img {
+		border-radius: 0;
+	}
+
+	pre {
+		padding: 1em;
+		overflow-x: auto;
+	}
+	.tags-list {
+		justify-content: center;
+	}
 }
