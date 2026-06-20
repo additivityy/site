@@ -6,37 +6,37 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
-	integrations: [mdx(), sitemap()],
-	fonts: [
-		{
-			provider: fontProviders.local(),
-			name: 'Atkinson',
-			cssVariable: '--font-atkinson',
-			fallbacks: ['sans-serif'],
-			options: {
-				variants: [
-					{
-						src: ['./src/assets/fonts/atkinson-regular.woff'],
-						weight: 400,
-						style: 'normal',
-						display: 'swap',
-					},
-					{
-						src: ['./src/assets/fonts/atkinson-bold.woff'],
-						weight: 700,
-						style: 'normal',
-						display: 'swap',
-					},
-				],
-			},
-		},
-	],
-	 markdown: {
-		shikiConfig: {
-		theme: "houston",      // any bundled Shiki theme
-		langs: [],                 // extra languages to register
-		wrap: false,               // whether to word-wrap long lines
-		},
+  site: "https://additivityy.xyz",
+  integrations: [mdx(), sitemap()],
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: "Atkinson",
+      cssVariable: "--font-atkinson",
+      fallbacks: ["sans-serif"],
+      options: {
+        variants: [
+          {
+            src: ["./src/assets/fonts/atkinson-regular.woff"],
+            weight: 400,
+            style: "normal",
+            display: "swap",
+          },
+          {
+            src: ["./src/assets/fonts/atkinson-bold.woff"],
+            weight: 700,
+            style: "normal",
+            display: "swap",
+          },
+        ],
+      },
+    },
+  ],
+  markdown: {
+    shikiConfig: {
+      theme: "houston", // any bundled Shiki theme
+      langs: [], // extra languages to register
+      wrap: false, // whether to word-wrap long lines
+    },
   },
 });
