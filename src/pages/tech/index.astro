@@ -1,40 +1,41 @@
 ---
-import { getCollection } from "astro:content";
-import FormattedDate from "../../components/FormattedDate.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import "../../styles/global.css";
 import PageLayout from "../../layouts/PageLayout.astro";
+import PostCard from "../../components/PostCard.astro";
 
-const posts = (await getCollection("projects")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+
+const posts = (await getCollection("tech")).sort(
+  (a: CollectionEntry<"tech">, b: CollectionEntry<"tech">) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
 const isEmpty = posts.length === 0;
 ---
 
 <PageLayout>
-  <h1>projects</h1>
-  <ul>
+  <h1>tech</h1>
+  <!-- <p>
+    these are not very polished or anything, just a collection of my thoughts
+    that i can put in my little corner of the internet.
+  </p> -->
+  <ul class="post-list">
     {
       isEmpty ? (
-        <li>
-          <p>no projects yet :P</p>
+        <li class="post-list-item">
+          <p>nothing here yet :P</p>
         </li>
       ) : (
         posts.map((post) => (
-          <li>
-            <a href={`/projects/${post.id}/`}>
-              <div class="post-header">
-                <p class="title">{post.data.title}</p>
-                <p class="date">
-                  <FormattedDate date={post.data.pubDate} />
-                </p>
-              </div>
-            </a>
+          <li class="post-list-item">
+            <PostCard post={post} />
           </li>
         ))
       )
     }
   </ul>
 </PageLayout>
+
 <style>
   ul {
     display: flex;

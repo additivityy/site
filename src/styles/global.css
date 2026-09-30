@@ -26,7 +26,7 @@ body {
 }
 main {
 	border: #e2e2e2 1px solid;
-	width: 820px;
+	width: 980px;
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 2em;

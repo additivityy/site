@@ -1,0 +1,63 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+
+const cards = [
+  {
+    href: "/art/photography",
+    label: "photography",
+    image: "/src/assets/images/art/photography.jpg",
+  },
+  {
+    href: "/art/illustration",
+    label: "illustration",
+    image: "/src/assets/images/art/illustration.jpg",
+  },
+];
+---
+
+<PageLayout title="art">
+  <div class="art-grid">
+    {cards.map((card) => (
+      <a class="art-card" href={card.href} style={`--bg: url('${card.image}')`}>
+        <span>{card.label}</span>
+      </a>
+    ))}
+  </div>
+</PageLayout>
+
+<style>
+  .art-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .art-card {
+    display: grid;
+    min-height: 250px;
+    place-items: center;
+    font-size: 1.5rem;
+    font-weight: semibold;
+    /* border: 1px solid var(--white); */
+    color: var(--white);
+    text-decoration: none;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), var(--bg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: border-color 150ms ease, color 150ms ease;
+  }
+
+  .art-card:hover,
+  .art-card:focus-visible {
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: bold;
+  }
+
+  @media (max-width: 600px) {
+    .art-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

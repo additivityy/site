@@ -1,0 +1,108 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import PageLayout from "../../layouts/PageLayout.astro";
+
+const photos = Object.values(
+  import.meta.glob<ImageMetadata>('/src/assets/photos/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', {
+    eager: true,
+    import: 'default',
+  })
+);
+---
+<PageLayout>
+  <h3>a collection of mundane moments from everyday life :)</h3>
+
+  <div class="gallery">
+    {photos.map((photo, index) => (
+      <a
+        href={photo.src}
+        data-full={photo.src}
+        data-alt={`Photo ${index + 1}`}
+        style={`--ratio: ${photo.width / photo.height}`}
+      >
+        <Image
+          src={photo}
+          alt={`Photo ${index + 1}`}
+          widths={[400, 800, 1200]}
+          sizes="(max-width: 700px) 50vw, 33vw"
+        />
+      </a>
+    ))}
+  </div>
+
+  <dialog id="lightbox" aria-label="Full size photo">
+    <img id="lightbox-img" src="" alt="" />
+  </dialog>
+</PageLayout>
+
+<script>
+  const dialog = document.getElementById('lightbox') as HTMLDialogElement;
+  const dialogImg = document.getElementById('lightbox-img') as HTMLImageElement;
+
+  document.querySelectorAll<HTMLAnchorElement>('.gallery a').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      dialogImg.src = link.dataset.full ?? link.href;
+      dialogImg.alt = link.dataset.alt ?? '';
+      dialog.showModal();
+    });
+  });
+
+  dialog.addEventListener('click', () => dialog.close());
+  dialog.addEventListener('close', () => dialogImg.removeAttribute('src'));
+</script>
+
+<style>
+  .gallery {
+    --row-h: 220px; /* target row height; rows adjust slightly to fill the width */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px;
+  }
+  .gallery a {
+    display: block;
+    flex-grow: calc(var(--ratio) * 100);
+    flex-basis: calc(var(--row-h) * var(--ratio));
+    aspect-ratio: var(--ratio);
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+  .gallery :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* no visible cropping: the box ratio equals the image ratio */
+  }
+  /* filler so the last row does not stretch */
+  .gallery::after {
+    content: "";
+    flex-grow: 1000000;
+  }
+
+  dialog {
+    background: transparent;
+    border: none;
+    padding: 0;
+    max-width: 95vw;
+    max-height: 95vh;
+    overflow: visible;
+  }
+  dialog::backdrop {
+    background: rgb(0 0 0 / 0.85);
+  }
+  dialog img {
+    display: block;
+    max-width: 95vw;
+    max-height: 95vh;
+    object-fit: contain;
+    cursor: zoom-out;
+  }
+
+  @media (max-width: 600px) {
+    .gallery {
+      --row-h: 140px;
+    }
+  }
+</style>
